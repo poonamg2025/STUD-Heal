@@ -1,0 +1,100 @@
+.verification-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f5f8f7;
+  padding: 20px;
+}
+
+.verification-card {
+  width: 420px;
+  padding: 40px;
+  background: white;
+  border-radius: 22px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.verification-icon {
+  font-size: 60px;
+  margin-bottom: 15px;
+}
+
+.verification-card h1 {
+  color: #2f7d6d;
+  margin-bottom: 12px;
+}
+
+.verification-card > p {
+  color: #718080;
+  line-height: 1.5;
+  margin-bottom: 25px;
+}
+
+.verification-card label {
+  display: block;
+  text-align: left;
+  margin-bottom: 8px;
+  color: #405454;
+  font-weight: bold;
+}
+
+.verification-card input {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #d5dddd;
+  border-radius: 10px;
+  font-size: 16px;
+  text-align: center;
+  letter-spacing: 4px;
+  outline: none;
+  margin-bottom: 18px;
+}
+
+.verification-card input:focus {
+  border-color: #2f7d6d;
+}
+
+.verification-card > button {
+  width: 100%;
+  padding: 13px;
+  border: none;
+  border-radius: 10px;
+  background: #2f7d6d;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.verification-card > button:hover {
+  background: #25695c;
+}
+
+.resend-text {
+  margin-top: 22px;
+  color: #718080;
+}
+
+.resend-text span {
+  margin-left: 5px;
+  color: #2f7d6d;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.back-login {
+  margin-top: 15px;
+  background: transparent !important;
+  color: #2f7d6d !important;
+  font-size: 14px !important;
+}
+
+@media (max-width: 500px) {
+
+  .verification-card {
+    width: 100%;
+    padding: 30px 20px;
+  }
+
+}

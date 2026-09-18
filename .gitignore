@@ -1,0 +1,5 @@
+forntend/node_modules/
+forntend/dist/
+.env
+.env.*
+!.env.example
