@@ -1,4 +1,4 @@
-def generate_recommendation(workload, energy, deadline_days):
+def generate_recommendation(workload, energy, deadline_days, stress):
     recommendations = []
 
     if workload == "high":
@@ -13,7 +13,12 @@ def generate_recommendation(workload, energy, deadline_days):
 
     if energy <= 2:
         recommendations.append(
-            "Your energy level is low. Try a shorter study session with a break."
+            "Your energy level is low. Try a shorter study session with breaks."
+        )
+
+    if stress >= 4:
+        recommendations.append(
+            "You reported higher stress. Consider dividing your work into smaller steps and taking regular breaks."
         )
 
     if len(recommendations) == 0:
