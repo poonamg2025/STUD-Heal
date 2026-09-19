@@ -1,0 +1,268 @@
+.dashboard-page {
+  min-height: 100vh;
+  padding: 40px 8%;
+  background: #f5f8f7;
+  font-family: Arial, sans-serif;
+}
+
+/* Header */
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.dashboard-header h1 {
+  color: #2f7d6d;
+  margin-bottom: 8px;
+}
+
+.dashboard-header p {
+  color: #718080;
+}
+
+.profile-button {
+  padding: 11px 20px;
+  border: none;
+  border-radius: 20px;
+  background: white;
+  color: #2f7d6d;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Welcome Card */
+
+.welcome-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 35px;
+  background: white;
+  border-radius: 22px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+  margin-bottom: 40px;
+}
+
+.welcome-card h2 {
+  color: #405454;
+  margin-bottom: 12px;
+}
+
+.welcome-card p {
+  color: #718080;
+  margin-bottom: 20px;
+}
+
+.welcome-card button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 20px;
+  background: #2f7d6d;
+  color: white;
+  cursor: pointer;
+}
+
+.welcome-icon {
+  font-size: 75px;
+}
+
+/* Section */
+
+.section-title {
+  color: #405454;
+  margin-bottom: 25px;
+}
+
+/* Dashboard Cards */
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+.dashboard-card {
+  background: white;
+  padding: 28px;
+  border-radius: 20px;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.05);
+  transition: 0.2s;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-4px);
+}
+
+.dashboard-icon {
+  font-size: 40px;
+  margin-bottom: 15px;
+}
+
+.dashboard-card h3 {
+  color: #405454;
+  margin-bottom: 10px;
+}
+
+.dashboard-card p {
+  color: #718080;
+  line-height: 1.5;
+  min-height: 70px;
+}
+
+.dashboard-card button {
+  margin-top: 15px;
+  padding: 10px 17px;
+  border: none;
+  border-radius: 18px;
+  background: #eef6f3;
+  color: #2f7d6d;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.dashboard-card button:hover {
+  background: #2f7d6d;
+  color: white;
+}
+
+/* Quick Access */
+
+.quick-section {
+  margin-top: 45px;
+  padding: 30px;
+  background: white;
+  border-radius: 20px;
+}
+
+.quick-section h2 {
+  color: #405454;
+  margin-bottom: 20px;
+}
+
+.quick-buttons {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.quick-buttons button {
+  padding: 12px 18px;
+  border: none;
+  border-radius: 20px;
+  background: #eef6f3;
+  color: #2f7d6d;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Mobile */
+
+@media (max-width: 900px) {
+
+  .dashboard-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  .dashboard-page {
+    padding: 25px 15px;
+  }
+
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .welcome-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+/* ============================= */
+/* Responsive Dashboard Design   */
+/* ============================= */
+
+@media (max-width: 900px) {
+
+  .dashboard-page {
+    padding: 30px 20px;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  .dashboard-page {
+    padding: 25px 15px;
+  }
+
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .dashboard-header h1 {
+    font-size: 26px;
+  }
+
+  .profile-button {
+    width: 100%;
+  }
+
+  .welcome-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 25px 20px;
+  }
+
+  .welcome-card button {
+    width: 100%;
+  }
+
+  .welcome-icon {
+    font-size: 45px;
+  }
+
+  .section-title {
+    font-size: 23px;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-card {
+    padding: 22px;
+  }
+
+  .dashboard-card button {
+    width: 100%;
+  }
+
+  .quick-buttons {
+    flex-direction: column;
+  }
+
+  .quick-buttons button {
+    width: 100%;
+  }
+
+}

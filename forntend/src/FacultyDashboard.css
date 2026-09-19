@@ -1,0 +1,368 @@
+.faculty-dashboard-page {
+  min-height: 100vh;
+  background: #f4faf8;
+  padding: 30px;
+}
+
+/* Header */
+
+.faculty-dashboard-header {
+  max-width: 1200px;
+  margin: 0 auto 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.faculty-dashboard-header h1 {
+  margin: 0 0 6px;
+  color: #2f7d6d;
+}
+
+.faculty-dashboard-header p {
+  margin: 0;
+  color: #718080;
+}
+
+.faculty-logout-btn {
+  border: none;
+  padding: 11px 20px;
+  border-radius: 10px;
+  background: #2f7d6d;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.faculty-logout-btn:hover {
+  background: #25695c;
+}
+
+/* Main Content */
+
+.faculty-dashboard-content {
+  max-width: 1200px;
+  height: 650px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 350px 1fr;
+  background: white;
+  border: 1px solid #e1ebe8;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+/* Student List */
+
+.student-message-list {
+  border-right: 1px solid #e1ebe8;
+  overflow-y: auto;
+  background: #fbfdfc;
+}
+
+.student-message-list h2 {
+  margin: 0;
+  padding: 22px;
+  color: #2f7d6d;
+  border-bottom: 1px solid #e1ebe8;
+}
+
+.student-message-card {
+  display: flex;
+  gap: 13px;
+  padding: 18px;
+  border-bottom: 1px solid #e8efed;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.student-message-card:hover {
+  background: #eef7f4;
+}
+
+.student-message-card.selected {
+  background: #e5f2ee;
+  border-left: 4px solid #2f7d6d;
+}
+
+.student-avatar {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #e8f4f1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+}
+
+.student-info {
+  min-width: 0;
+}
+
+.student-info h3 {
+  margin: 0 0 4px;
+  color: #2f7d6d;
+}
+
+.student-info p {
+  margin: 0 0 5px;
+  font-size: 13px;
+  color: #718080;
+}
+
+.student-info span {
+  display: block;
+  color: #555;
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Empty Student List */
+
+.no-students {
+  text-align: center;
+  padding: 60px 20px;
+  color: #718080;
+}
+
+.no-students div {
+  font-size: 45px;
+  margin-bottom: 10px;
+}
+
+/* Chat Panel */
+
+.faculty-chat-panel {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* Select Student */
+
+.select-student-message {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 30px;
+  color: #718080;
+}
+
+.select-student-message div {
+  font-size: 55px;
+  margin-bottom: 10px;
+}
+
+.select-student-message h2 {
+  color: #2f7d6d;
+  margin-bottom: 8px;
+}
+
+/* Chat Header */
+
+.faculty-chat-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 20px;
+  background: #e8f4f1;
+  border-bottom: 1px solid #dce9e5;
+}
+
+.faculty-student-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 27px;
+}
+
+.faculty-chat-header h2 {
+  margin: 0 0 5px;
+  color: #2f7d6d;
+}
+
+.faculty-chat-header p {
+  margin: 0;
+  color: #718080;
+  font-size: 14px;
+}
+
+/* Messages */
+
+.faculty-chat-messages {
+  flex: 1;
+  padding: 25px;
+  overflow-y: auto;
+  background: #f8fbfa;
+}
+
+.faculty-message-row {
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.faculty-message-row.student {
+  justify-content: flex-start;
+}
+
+.faculty-message-row.faculty {
+  justify-content: flex-end;
+}
+
+.faculty-message-bubble {
+  max-width: 70%;
+  padding: 12px 16px;
+  border-radius: 16px;
+}
+
+.faculty-message-row.student .faculty-message-bubble {
+  background: white;
+  border: 1px solid #e1ebe8;
+  border-bottom-left-radius: 4px;
+}
+
+.faculty-message-row.faculty .faculty-message-bubble {
+  background: #2f7d6d;
+  color: white;
+  border-bottom-right-radius: 4px;
+}
+
+.faculty-message-bubble p {
+  margin: 0 0 6px;
+  line-height: 1.5;
+}
+
+.faculty-message-bubble span {
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+/* Reply */
+
+.faculty-reply-area {
+  display: flex;
+  gap: 10px;
+  padding: 15px;
+  background: white;
+  border-top: 1px solid #e1ebe8;
+}
+
+.faculty-reply-area input {
+  flex: 1;
+  min-width: 0;
+  padding: 13px 15px;
+  border: 1px solid #d6e2df;
+  border-radius: 10px;
+  outline: none;
+  font-size: 14px;
+}
+
+.faculty-reply-area input:focus {
+  border-color: #2f7d6d;
+}
+
+.faculty-reply-area button {
+  padding: 13px 22px;
+  border: none;
+  border-radius: 10px;
+  background: #2f7d6d;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.faculty-reply-area button:hover {
+  background: #25695c;
+}
+
+/* Mobile */
+
+@media (max-width: 800px) {
+
+  .faculty-dashboard-page {
+    padding: 15px;
+  }
+
+  .faculty-dashboard-header {
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .faculty-dashboard-header h1 {
+    font-size: 22px;
+  }
+
+  .faculty-dashboard-content {
+    height: auto;
+    min-height: 700px;
+    grid-template-columns: 1fr;
+  }
+
+  .student-message-list {
+    max-height: 300px;
+    border-right: none;
+    border-bottom: 1px solid #e1ebe8;
+  }
+
+  .faculty-chat-panel {
+    min-height: 500px;
+  }
+
+}
+
+@media (max-width: 500px) {
+
+  .faculty-dashboard-header {
+    flex-direction: column;
+  }
+
+  .faculty-logout-btn {
+    width: 100%;
+  }
+
+  .faculty-message-bubble {
+    max-width: 85%;
+  }
+
+  .faculty-reply-area {
+    padding: 10px;
+  }
+
+  .faculty-reply-area button {
+    padding: 12px 16px;
+  }
+
+}
+/* Student Name + New Message */
+
+.student-name-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.student-name-row h3 {
+  margin: 0;
+}
+
+.new-message-badge {
+  background: #ffe5e5;
+  color: #d93636;
+  padding: 3px 7px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: bold;
+  white-space: nowrap;
+}
