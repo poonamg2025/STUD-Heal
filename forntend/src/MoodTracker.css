@@ -1,0 +1,112 @@
+.mood-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f5f8f7;
+}
+
+.mood-card {
+  width: 650px;
+  padding: 45px;
+  background: white;
+  border-radius: 25px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.mood-card h1 {
+  color: #2f7d6d;
+  margin-bottom: 12px;
+}
+
+.mood-card p {
+  color: #777;
+  margin-bottom: 35px;
+}
+
+.mood-options {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.mood-button {
+  width: 100px;
+  height: 110px;
+  border: none;
+  border-radius: 15px;
+  background: #eef6f3;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.mood-button span {
+  font-size: 38px;
+}
+
+.mood-button small {
+  font-size: 14px;
+  color: #405454;
+}
+
+.mood-button:hover {
+  transform: translateY(-5px);
+}
+/* Mood Popup */
+
+.mood-popup {
+  margin-top: 35px;
+  padding: 30px;
+  background: #eef6f3;
+  border-radius: 18px;
+  border: 1px solid #dcebe6;
+}
+
+.popup-content {
+  text-align: center;
+}
+
+.popup-emoji {
+  font-size: 55px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.popup-content h2 {
+  color: #2f7d6d;
+  margin-bottom: 12px;
+}
+
+.popup-content p {
+  color: #5f7070;
+  line-height: 1.6;
+  margin-bottom: 18px;
+}
+
+.mood-date,
+.mood-time {
+  color: #405454;
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 6px;
+}
+
+.close-button {
+  margin-top: 20px;
+  padding: 11px 20px;
+  border: none;
+  border-radius: 10px;
+  background: #2f7d6d;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.close-button:hover {
+  background: #25695c;
+}

@@ -1,0 +1,118 @@
+.ai-page {
+  min-height: 100vh;
+  padding: 50px 20px;
+  background: linear-gradient(135deg, #eef7f4, #f8fbfa);
+  font-family: Arial, sans-serif;
+}
+
+.ai-container {
+  max-width: 850px;
+  margin: auto;
+}
+
+.back-dashboard {
+  border: none;
+  background: transparent;
+  color: #2f7d6d;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 25px;
+}
+
+.back-dashboard:hover {
+  text-decoration: underline;
+}
+
+.ai-container h1 {
+  text-align: center;
+  color: #2f7d6d;
+  font-size: 35px;
+  margin-bottom: 10px;
+}
+
+.ai-intro {
+  text-align: center;
+  color: #718080;
+  margin-bottom: 35px;
+}
+
+.ai-info-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+  margin-bottom: 25px;
+}
+
+.ai-icon {
+  font-size: 50px;
+}
+
+.ai-info-card h2 {
+  color: #405454;
+  margin-bottom: 10px;
+}
+
+.ai-info-card p {
+  color: #718080;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.recommendation-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.recommendation-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  background: white;
+  padding: 25px;
+  border-radius: 16px;
+  border: 1px solid #e1ebe8;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
+}
+
+.recommendation-icon {
+  font-size: 32px;
+}
+
+.recommendation-card h3 {
+  color: #2f7d6d;
+  margin-bottom: 8px;
+}
+
+.recommendation-card p {
+  color: #718080;
+  line-height: 1.6;
+  margin: 0;
+}
+
+@media (max-width: 600px) {
+
+  .ai-page {
+    padding: 30px 15px;
+  }
+
+  .ai-container h1 {
+    font-size: 28px;
+  }
+
+  .ai-info-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 25px 20px;
+  }
+
+  .recommendation-card {
+    padding: 20px;
+  }
+
+}

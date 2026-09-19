@@ -1,0 +1,172 @@
+.planner-page {
+  min-height: 100vh;
+  padding: 50px 20px;
+  background: linear-gradient(135deg, #eef7f4, #f8fbfa);
+  font-family: Arial, sans-serif;
+}
+
+.planner-container {
+  max-width: 850px;
+  margin: auto;
+}
+
+.back-dashboard {
+  border: none;
+  background: transparent;
+  color: #2f7d6d;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 25px;
+}
+
+.back-dashboard:hover {
+  text-decoration: underline;
+}
+
+.planner-container h1 {
+  text-align: center;
+  color: #2f7d6d;
+  font-size: 35px;
+  margin-bottom: 10px;
+}
+
+.planner-intro {
+  text-align: center;
+  color: #718080;
+  margin-bottom: 35px;
+}
+
+/* Planner Form */
+
+.planner-form-card {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+  margin-bottom: 30px;
+}
+
+.planner-form-card h2 {
+  color: #405454;
+  margin-bottom: 20px;
+}
+
+.planner-form-card label {
+  display: block;
+  margin-bottom: 7px;
+  color: #405454;
+  font-weight: bold;
+}
+
+.planner-form-card input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 13px 15px;
+  margin-bottom: 18px;
+  border: 1px solid #d5dddd;
+  border-radius: 10px;
+  font-size: 15px;
+  outline: none;
+  background: white;
+}
+
+.planner-form-card input:focus {
+  border-color: #2f7d6d;
+}
+
+.add-task-btn {
+  width: 100%;
+  padding: 13px;
+  border: none;
+  border-radius: 10px;
+  background: #2f7d6d;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.add-task-btn:hover {
+  background: #25695c;
+}
+
+/* Study Plan */
+
+.planner-list {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+.planner-list h2 {
+  color: #405454;
+  margin-bottom: 20px;
+}
+
+.no-tasks {
+  padding: 25px;
+  text-align: center;
+  background: #f5f9f8;
+  border-radius: 12px;
+  color: #899696;
+}
+
+.study-task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  margin-bottom: 12px;
+  background: #f5f9f8;
+  border: 1px solid #e1ebe8;
+  border-radius: 12px;
+}
+
+.task-info h3 {
+  color: #2f7d6d;
+  margin-bottom: 10px;
+}
+
+.task-info p {
+  color: #718080;
+  margin: 5px 0;
+}
+
+.delete-task {
+  padding: 9px 14px;
+  border: none;
+  border-radius: 8px;
+  background: #e9eeee;
+  color: #405454;
+  cursor: pointer;
+}
+
+.delete-task:hover {
+  background: #dce5e3;
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+  .planner-page {
+    padding: 30px 15px;
+  }
+
+  .planner-container h1 {
+    font-size: 28px;
+  }
+
+  .study-task {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .delete-task {
+    width: 100%;
+  }
+
+}
