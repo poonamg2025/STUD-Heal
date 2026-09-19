@@ -1,6 +1,7 @@
 from datetime import date
 
 from fastapi import FastAPI, HTTPException, Depends
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 from database import SessionLocal
@@ -38,6 +39,23 @@ app = FastAPI(
     title="STUDHeal API",
     description="Student wellbeing and workload support API",
     version="1.0.0",
+)
+
+
+# --------------------------------------------------
+# CORS
+# --------------------------------------------------
+# Allow the React development server to communicate
+# with this FastAPI backend.
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 
@@ -603,3 +621,114 @@ def what_if_simulation(
         )
 
     return result
+
+
+# --------------------------------------------------
+# DASHBOARD
+# --------------------------------------------------
+
+
+@app.get("/dashboard")
+def get_dashboard(
+    user_id: int = Depends(
+        get_current_user_id
+    )
+):
+    db = SessionLocal()
+
+    try:
+        user = (
+            db.query(User)
+            .filter(
+                User.id == user_id
+            )
+            .first()
+        )
+
+        if not user:
+            raise HTTPException(
+                status_code=404,
+                detail="User not found",
+            )
+
+        subjects = (
+            db.query(Subject)
+            .filter(
+                Subject.user_id == user_id
+            )
+            .all()
+        )
+
+        subject_data = [
+            {
+                "id": subject.id,
+                "name": subject.name,
+            }
+            for subject in subjects
+        ]
+
+        assessments = (
+            db.query(Assessment)
+            .join(
+                Subject,
+                Assessment.subject_id == Subject.id,
+            )
+            .filter(
+                Subject.user_id == user_id,
+                Assessment.status == "pending",
+            )
+            .order_by(
+                Assessment.due_date.asc()
+            )
+            .all()
+        )
+
+        assessment_data = [
+            {
+                "id": assessment.id,
+                "subject_id": assessment.subject_id,
+                "title": assessment.title,
+                "type": assessment.type,
+                "due_date": assessment.due_date,
+                "estimated_hours": float(
+                    assessment.estimated_hours
+                ),
+                "priority": assessment.priority,
+                "status": assessment.status,
+            }
+            for assessment in assessments
+        ]
+
+        workload = calculate_overall_workload(
+            user_id
+        )
+
+        checkins = get_user_checkins(
+            user_id
+        )
+
+        latest_checkin = (
+            checkins[0]
+            if checkins
+            else None
+        )
+
+        support_plan = create_support_plan(
+            user_id
+        )
+
+        return {
+            "user": {
+                "id": user.id,
+                "email": user.email,
+                "email_verified": user.email_verified,
+            },
+            "subjects": subject_data,
+            "upcoming_assessments": assessment_data,
+            "workload": workload,
+            "latest_checkin": latest_checkin,
+            "support_plan": support_plan,
+        }
+
+    finally:
+        db.close()
