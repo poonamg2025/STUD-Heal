@@ -14,11 +14,14 @@ import AIRecommendations from './AIRecommendations'
 import PeerSupport from './PeerSupport'
 import SupportHub from './SupportHub'
 import ProfileSettings from './ProfileSettings'
+import FacultyLogin from './FacultyLogin'
 
 function App() {
-
+  const path = window.location.pathname
   /* Login Page */
-
+   if (path === '/faculty-login') {
+    return <FacultyLogin />
+  }
   if (window.location.pathname === '/login') {
     return <Login />
   }
@@ -83,6 +86,7 @@ function App() {
   if (window.location.pathname === '/profile') {
     return <ProfileSettings />
   }
+  
   return (
     <div className="app">
 

@@ -1,9 +1,39 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './SupportHub.css'
 
 function SupportHub() {
 
   const [selectedService, setSelectedService] = useState(null)
+  const [selectedFaculty, setSelectedFaculty] = useState(null)
+  const [message, setMessage] = useState('')
+  const [messages, setMessages] = useState([])
+
+  const facultyList = [
+    {
+      name: 'Dr. Priya',
+      department: 'Software Engineering',
+      subject: 'Object Oriented Programming',
+      available: true
+    },
+    {
+      name: 'Dr. Arun',
+      department: 'Computer Science',
+      subject: 'Data Structures',
+      available: true
+    },
+    {
+      name: 'Dr. Meena',
+      department: 'Information Technology',
+      subject: 'Database Management',
+      available: false
+    },
+    {
+      name: 'Dr. Karthik',
+      department: 'Computer Science',
+      subject: 'Operating Systems',
+      available: true
+    }
+  ]
 
   const supportServices = [
     {
@@ -31,48 +61,220 @@ function SupportHub() {
     {
       icon: '👨‍🏫',
       title: 'Faculty Support',
-      text: 'Find guidance on contacting faculty members for academic or course-related concerns.',
+      text: 'Choose a faculty member and chat with them about your academic concerns.',
       details: [
-        'Contact your faculty for course-related questions.',
-        'Discuss academic difficulties.',
-        'Ask for clarification about assignments.',
-        'Seek guidance about your academic progress.'
+        'Choose a faculty member.',
+        'Check faculty availability.',
+        'Start an individual chat.',
+        'Send messages to discuss academic concerns.'
       ]
     },
     {
-      icon: '🤝',
-      title: 'Peer Support',
-      text: 'Connect with student communities and explore peer-based support opportunities.',
-      details: [
-        'Connect with fellow students.',
-        'Share common academic experiences.',
-        'Discuss study strategies.',
-        'Explore peer-based support communities.'
-      ]
+        icon: '🏫',
+        title: 'Campus Resources',
+        text: 'Explore useful campus resources and services available to students.',
+        details: [
+            '📚 Academic: Library, Academic Advising',
+            '🚌 Transport: Shuttle Service',
+            '🏋️ Health & Wellbeing: Gym in your particular hostel block',
+            '🎭 Student Life: Clubs, Student Activity Centre, Anna Auditorium',
+            '🍽️ Daily Services: Cafeteria, ATM, Campus Store'
+        ]
     },
     {
-      icon: '🏫',
-      title: 'Campus Resources',
-      text: 'Explore useful campus services and resources available to students.',
-      details: [
-        'Explore student services available on campus.',
-        'Find academic support facilities.',
-        'Explore wellbeing and counselling resources.',
-        'Find useful student facilities.'
-      ]
+        icon: '🆘',
+        title: 'Emergency Help',
+        text: 'Access important emergency support when needed.',
+        details: [
+            '🚨 Campus Security — Contact campus security for immediate safety concerns.',
+            '🏥 Medical Emergency — Contact the campus health/medical centre for urgent medical assistance.',
+            '🚑 Ambulance Service — Request emergency medical transportation when required.',
+            '🏠 Hostel Emergency Support — Contact the hostel warden or hostel security for urgent hostel-related problems.'
+        ]
     },
-    {
-      icon: '🆘',
-      title: 'Emergency Help',
-      text: 'Access important emergency and immediate-support information when needed.',
-      details: [
-        'If you are in immediate danger, contact your local emergency service.',
-        'Reach out to a trusted person nearby.',
-        'Contact your institution’s emergency or security service.',
-        'Seek professional help when necessary.'
-      ]
-    }
   ]
+
+  /*
+    Load messages for selected faculty
+  */
+  const loadMessages = (facultyName) => {
+
+    const allMessages =
+      JSON.parse(localStorage.getItem('studentFacultyMessages')) || []
+
+    const conversation = allMessages.find(
+      item => item.faculty === facultyName
+    )
+
+    if (conversation) {
+
+      setMessages(conversation.messages)
+
+    } else {
+
+      setMessages([
+        {
+          sender: 'faculty',
+          text: `Hello! I am ${facultyName}. How can I help you?`,
+          time: 'Now'
+        }
+      ])
+
+    }
+  }
+
+  /*
+    Open Faculty Support
+  */
+  const openFacultySupport = () => {
+    setSelectedService(null)
+    setSelectedFaculty(null)
+  }
+
+  /*
+    Open Faculty Chat
+  */
+  const openFacultyChat = (faculty) => {
+
+    setSelectedFaculty(faculty)
+
+    loadMessages(faculty.name)
+  }
+
+  /*
+    Send Student Message
+  */
+  const sendMessage = () => {
+
+    if (message.trim() === '' || !selectedFaculty) {
+      return
+    }
+
+    const newMessage = {
+      sender: 'student',
+      text: message,
+      time: new Date().toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit'
+      })
+    }
+
+    const allMessages =
+      JSON.parse(localStorage.getItem('studentFacultyMessages')) || []
+
+    const existingConversation = allMessages.find(
+      item => item.faculty === selectedFaculty.name
+    )
+
+    let updatedMessages
+
+    if (existingConversation) {
+
+      updatedMessages = allMessages.map(item => {
+
+        if (item.faculty === selectedFaculty.name) {
+
+          return {
+            ...item,
+
+            messages: [
+              ...item.messages,
+              newMessage
+            ],
+
+            // 🔴 Mark new student message as unread
+            unread: (item.unread || 0) + 1
+          }
+
+        }
+
+        return item
+
+      })
+
+    } else {
+
+      updatedMessages = [
+        ...allMessages,
+
+        {
+          id: Date.now(),
+
+          name: 'Student',
+
+          subject: selectedFaculty.subject,
+
+          faculty: selectedFaculty.name,
+
+          // 🔴 First message is unread
+          unread: 1,
+
+          messages: [
+            {
+              sender: 'faculty',
+              text: `Hello! I am ${selectedFaculty.name}. How can I help you?`,
+              time: 'Now'
+            },
+
+            newMessage
+          ]
+        }
+
+      ]
+
+    }
+
+    localStorage.setItem(
+      'studentFacultyMessages',
+      JSON.stringify(updatedMessages)
+    )
+
+    const updatedConversation = updatedMessages.find(
+      item => item.faculty === selectedFaculty.name
+    )
+
+    setMessages(updatedConversation.messages)
+
+    setMessage('')
+  }
+
+  /*
+    Check for Faculty Replies
+  */
+  useEffect(() => {
+
+    if (!selectedFaculty) {
+      return
+    }
+
+    const interval = setInterval(() => {
+
+      const allMessages =
+        JSON.parse(localStorage.getItem('studentFacultyMessages')) || []
+
+      const conversation = allMessages.find(
+        item => item.faculty === selectedFaculty.name
+      )
+
+      if (conversation) {
+
+        setMessages(conversation.messages)
+
+      }
+
+    }, 1000)
+
+    return () => clearInterval(interval)
+
+  }, [selectedFaculty])
+
+  const handleKeyDown = (event) => {
+
+    if (event.key === 'Enter') {
+      sendMessage()
+    }
+
+  }
 
   return (
     <div className="support-hub-page">
@@ -93,34 +295,123 @@ function SupportHub() {
           wellbeing needs.
         </p>
 
-        <div className="support-hub-grid">
 
-          {supportServices.map((service, index) => (
+        {/* Support Services */}
 
-            <div
-              className="support-hub-card"
-              key={index}
-            >
+        {!selectedFaculty && (
 
-              <div className="support-hub-icon">
-                {service.icon}
+          <div className="support-hub-grid">
+
+            {supportServices.map((service, index) => (
+
+              <div
+                className="support-hub-card"
+                key={index}
+              >
+
+                <div className="support-hub-icon">
+                  {service.icon}
+                </div>
+
+                <h2>{service.title}</h2>
+
+                <p>{service.text}</p>
+
+                <button
+                  onClick={() => {
+
+                    if (service.title === 'Faculty Support') {
+                      openFacultySupport()
+                    } else {
+                      setSelectedService(service)
+                    }
+
+                  }}
+                >
+                  Explore
+                </button>
+
               </div>
 
-              <h2>{service.title}</h2>
+            ))}
 
-              <p>{service.text}</p>
+          </div>
 
-              <button
-                onClick={() => setSelectedService(service)}
-              >
-                Explore
-              </button>
+        )}
+
+
+        {/* Faculty List */}
+
+        {!selectedFaculty &&
+          !selectedService && (
+
+          <div className="faculty-section">
+
+            <h2>👨‍🏫 Faculty Support</h2>
+
+            <p className="faculty-intro">
+              Choose a faculty member to start a private academic chat.
+            </p>
+
+            <div className="faculty-grid">
+
+              {facultyList.map((faculty, index) => (
+
+                <div
+                  className="faculty-card"
+                  key={index}
+                >
+
+                  <div className="faculty-avatar">
+                    👨‍🏫
+                  </div>
+
+                  <div className="faculty-info">
+
+                    <h3>{faculty.name}</h3>
+
+                    <p className="faculty-department">
+                      {faculty.department}
+                    </p>
+
+                    <p className="faculty-subject">
+                      📚 {faculty.subject}
+                    </p>
+
+                    <p
+                      className={
+                        faculty.available
+                          ? 'faculty-status available'
+                          : 'faculty-status unavailable'
+                      }
+                    >
+                      ● {faculty.available
+                        ? 'Available'
+                        : 'Offline'}
+                    </p>
+
+                  </div>
+
+                  <button
+                    className="chat-faculty-btn"
+                    disabled={!faculty.available}
+                    onClick={() => openFacultyChat(faculty)}
+                  >
+                    💬 Chat
+                  </button>
+
+                </div>
+
+              ))}
 
             </div>
 
-          ))}
+          </div>
 
-        </div>
+        )}
+
+
+        {/* Support Details */}
 
         {selectedService && (
 
@@ -139,11 +430,17 @@ function SupportHub() {
               </p>
 
               <ul>
-                {selectedService.details.map((detail, index) => (
-                  <li key={index}>
-                    {detail}
-                  </li>
-                ))}
+
+                {selectedService.details.map(
+                  (detail, index) => (
+
+                    <li key={index}>
+                      {detail}
+                    </li>
+
+                  )
+                )}
+
               </ul>
 
               <button
@@ -152,6 +449,111 @@ function SupportHub() {
               >
                 Close
               </button>
+
+            </div>
+
+          </div>
+
+        )}
+
+
+        {/* Faculty Chat */}
+
+        {selectedFaculty && (
+
+          <div className="faculty-chat-section">
+
+            <button
+              className="back-faculty-btn"
+              onClick={() => setSelectedFaculty(null)}
+            >
+              ← Back to Faculty List
+            </button>
+
+            <div className="chat-container">
+
+              <div className="chat-header">
+
+                <div className="chat-faculty-avatar">
+                  👨‍🏫
+                </div>
+
+                <div>
+
+                  <h2>
+                    {selectedFaculty.name}
+                  </h2>
+
+                  <p>
+                    {selectedFaculty.department}
+                  </p>
+
+                  <span
+                    className={
+                      selectedFaculty.available
+                        ? 'chat-status available'
+                        : 'chat-status unavailable'
+                    }
+                  >
+                    ● {selectedFaculty.available
+                      ? 'Available'
+                      : 'Offline'}
+                  </span>
+
+                </div>
+
+              </div>
+
+
+              {/* Messages */}
+
+              <div className="chat-messages">
+
+                {messages.map((msg, index) => (
+
+                  <div
+                    key={index}
+                    className={`message-row ${msg.sender}`}
+                  >
+
+                    <div className="message-bubble">
+
+                      <p>
+                        {msg.text}
+                      </p>
+
+                      <span>
+                        {msg.time}
+                      </span>
+
+                    </div>
+
+                  </div>
+
+                ))}
+
+              </div>
+
+
+              {/* Message Input */}
+
+              <div className="chat-input-area">
+
+                <input
+                  type="text"
+                  placeholder="Type your message..."
+                  value={message}
+                  onChange={(event) =>
+                    setMessage(event.target.value)
+                  }
+                  onKeyDown={handleKeyDown}
+                />
+
+                <button onClick={sendMessage}>
+                  Send
+                </button>
+
+              </div>
 
             </div>
 
